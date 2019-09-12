@@ -21,7 +21,7 @@ public class IMSecurityConfig extends WebSecurityConfigurerAdapter
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder builder) throws Exception
 	{
-		builder.inMemoryAuthentication().withUser("alice").password(passwordEncoder().encode(" ")).roles("USER",
+		builder.inMemoryAuthentication().withUser("alice").password(passwordEncoder().encode("p")).roles("USER",
 				"ADMIN");
 //		builder.userDetailsService(userService)
 //		.passwordEncoder(passwordEncoder());

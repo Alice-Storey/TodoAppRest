@@ -50,7 +50,7 @@ public class TodoDAO
 		ResultSet results = pStat.executeQuery();
 		
 		Todo todo = null;
-		while(results.next())
+		if (results.next())
 		{
 			todo = new Todo();
 			todo.setId(Integer.parseInt(results.getString("id")));
