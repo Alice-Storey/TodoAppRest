@@ -5,11 +5,14 @@ import java.sql.Date;
 
 import javax.validation.constraints.Size;
 
+import org.springframework.data.annotation.Id;
+
 
 
 public class Todo
 {
-	
+	@Id
+	private String mId;
 	private int id; //user, desc, date, isdone
 	private int userId;
 	
@@ -41,6 +44,18 @@ public class Todo
 		this.date = date;
 		this.isDone = isDone;
 	}
+	
+	
+	
+	public String getMId()
+	{
+		return mId;
+	}
+	public void setMId(String mId)
+	{
+		this.mId = mId;
+	}
+	
 	public int getId()
 	{
 		return id;
