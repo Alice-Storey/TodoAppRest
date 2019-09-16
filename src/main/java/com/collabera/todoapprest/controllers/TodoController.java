@@ -114,7 +114,7 @@ public class TodoController
 //		return todoService.listTodos(Integer.parseInt(userid)).get(Integer.parseInt(todoindex));
 //		return todoService.deleteTodo(Integer.parseInt(todoindex));
 		Todo todo = todoService.getTodo(todoindex);
-		boolean deleted = todoService.deleteTodo(Integer.parseInt(todoindex));
+		boolean deleted = todoService.deleteTodo(todoindex);
 		if(!deleted)
 			throw new TodoNotFoundException("Todo not found for Delete");
 //			return ResponseEntity.noContent().build();

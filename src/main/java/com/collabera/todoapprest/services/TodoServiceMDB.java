@@ -30,17 +30,12 @@ public class TodoServiceMDB
 		return todoMongoDBRepository.save(newTodo);
 	}
 	
-	public boolean deleteTodo(int todoId) 
-	{
-		return false;
-	}
-	
-	public Todo deleteTodo(String todoId) 
+	public boolean deleteTodo(String todoId) 
 	{
 		Optional<Todo> deleteTodo = todoMongoDBRepository.findById(todoId);
 		
 		todoMongoDBRepository.deleteById(todoId);
-		return deleteTodo.get();
+		return deleteTodo.get()!=null;
 	}
 	
 	public Todo getTodo(String todoId) 
@@ -50,6 +45,6 @@ public class TodoServiceMDB
 	
 	public boolean updateTodo(Todo todo) throws SQLException
 	{
-		return false;
+		return todoMongoDBRepository.save(todo)!=null;
 	}
 }
