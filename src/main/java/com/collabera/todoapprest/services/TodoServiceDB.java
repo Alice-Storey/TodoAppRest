@@ -32,7 +32,7 @@ public class TodoServiceDB
 	
 	public Todo addTodo(int userId, String description, Date targetDate, boolean isDone)
 	{
-		Todo todo = new Todo(-1, userId, description, targetDate, isDone);
+		Todo todo = new Todo("-1", userId, description, targetDate, isDone);
 		try
 		{
 			todo.setId(tododao.add(todo));			
@@ -45,7 +45,7 @@ public class TodoServiceDB
 		return todo;
 	}
 	
-	public boolean deleteTodo(int todoId) 
+	public boolean deleteTodo(String todoId) 
 	{
 		if (getTodo(todoId)==null)
 			return false;
@@ -62,7 +62,7 @@ public class TodoServiceDB
 		
 	}
 	
-	public Todo getTodo(int todoId) 
+	public Todo getTodo(String todoId) 
 	{
 		try
 		{

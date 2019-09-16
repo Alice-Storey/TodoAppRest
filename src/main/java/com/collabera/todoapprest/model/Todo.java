@@ -6,14 +6,14 @@ import java.sql.Date;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 
-
+@Document
 public class Todo
 {
 	@Id
-	private String mId;
-	private int id; //user, desc, date, isdone
+	private String id; //user, desc, date, isdone
 	private int userId;
 	
 	@Size(min=5, message="Description must be at least 5 characters")
@@ -26,7 +26,7 @@ public class Todo
 	{
 		
 	}
-	public Todo(int id, int userId, String description, Date date, boolean isDone)
+	public Todo(String id, int userId, String description, Date date, boolean isDone)
 	{
 		super();
 		this.id = id;
@@ -38,7 +38,7 @@ public class Todo
 	public Todo( int userId, String description, Date date, boolean isDone)
 	{
 		super();
-		this.id = -1;
+		this.id = "-1";
 		this.userId = userId;
 		this.description = description;
 		this.date = date;
@@ -47,23 +47,15 @@ public class Todo
 	
 	
 	
-	public String getMId()
-	{
-		return mId;
-	}
-	public void setMId(String mId)
-	{
-		this.mId = mId;
-	}
-	
-	public int getId()
+	public String getId()
 	{
 		return id;
 	}
-	public void setId(int id)
+	public void setId(String mId)
 	{
 		this.id = id;
 	}
+	
 	public int getUserId()
 	{
 		return userId;

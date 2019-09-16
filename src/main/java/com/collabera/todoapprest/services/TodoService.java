@@ -10,7 +10,7 @@ import com.collabera.todoapprest.model.Todo;
 
 @SuppressWarnings("deprecation")
 @Service
-public class TodoService implements TodoInterface
+public class TodoService
 {
 	//CRUD
 	
@@ -21,19 +21,19 @@ public class TodoService implements TodoInterface
 	{
 		todos.add
 		(
-			new Todo(1, 0, "Programming", new Date(2019, 9, 6), false)
+			new Todo("1", 0, "Programming", new Date(2019, 9, 6), false)
 		);
 		todos.add
 		(
-			new Todo(2, 1, "Shopping", new Date(2019, 9, 6), false)
+			new Todo("2", 1, "Shopping", new Date(2019, 9, 6), false)
 		);
 		todos.add
 		(
-			new Todo(3, 1, "Play Fetch", new Date(2019, 9, 6), false)
+			new Todo("3", 1, "Play Fetch", new Date(2019, 9, 6), false)
 		);
 		todos.add
 		(
-			new Todo(4, 1, "Compile", new Date(2019, 9, 6), false)
+			new Todo("4", 1, "Compile", new Date(2019, 9, 6), false)
 		);
 		todoCount=5;
 	}
@@ -57,22 +57,22 @@ public class TodoService implements TodoInterface
 	
 	public Todo addTodo(int userId, String description, Date targetDate, boolean isDone)
 	{
-		Todo newTodo = new Todo(++todoCount, userId, description, targetDate, isDone);
+		Todo newTodo = new Todo(Integer.toString(++todoCount), userId, description, targetDate, isDone);
 		todos.add(newTodo);
 		return newTodo;
 	}
 	
-	public boolean deleteTodo(int todoId)
+	public boolean deleteTodo(String todoId)
 	{
 		return todos.removeIf
 		(
-			todo -> todo.getId() == todoId
+			todo -> todo.getId().equals(todoId)
 		);
 	}
 	
-	public Todo getTodo(int todoId)
+	public Todo getTodo(String todoId)
 	{
-		return todos.stream().filter(todo -> todo.getId()==todoId).findFirst().orElse(null);
+		return todos.stream().filter(todo -> todo.getId().equals(todoId) ).findFirst().orElse(null);
 	}
 	
 	public boolean updateTodo(Todo todo)

@@ -21,7 +21,7 @@ public class TodoDAO
 	
 	Connection conn = connMgr.getConnection();
 	
-	public int add(Todo todo) throws SQLException
+	public String add(Todo todo) throws SQLException
 	{
 		PreparedStatement pStat = 
 			conn.prepareStatement
@@ -37,23 +37,31 @@ public class TodoDAO
 		// in our case it will contain only one row and only one column - generated id
 		generatedKeysResultSet.next(); // executing next() method to navigate to first row of generated keys (like with any other result set)
 		int id = (int) generatedKeysResultSet.getLong(1); 
-		return id;
+		return Integer.toString(id);
 		
 	}
 	
-	public Todo find(Integer id) throws SQLException
+	public Todo find(String id) throws SQLException
 	{
 		PreparedStatement pStat = 
 				conn.prepareStatement 
 				("select * from todo where id = ?");
-		pStat.setInt(1, id);
+		try
+		{
+			pStat.setInt(1, Integer.parseInt(id));
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 		ResultSet results = pStat.executeQuery();
 		
 		Todo todo = null;
 		if (results.next())
 		{
 			todo = new Todo();
-			todo.setId(Integer.parseInt(results.getString("id")));
+//			todo.setId(results.getString("id"));
+			todo.setId(id);
 			todo.setUserId(Integer.parseInt(results.getString("user_id")));
 			todo.setDate(Date.valueOf(results.getString("date_")));
 			todo.setDescription(results.getString("desc_"));
@@ -78,7 +86,7 @@ public class TodoDAO
 		while(results.next())
 		{
 			Todo todo = new Todo();
-			todo.setId(Integer.parseInt(results.getString("id")));
+			todo.setId(  Integer.toString( results.getInt("id") )  );
 			todo.setUserId(Integer.parseInt(results.getString("user_id")));
 			try
 			{
@@ -108,17 +116,31 @@ public class TodoDAO
 		pStat.setString(1, todo.getDescription());
 		pStat.setDate(2, todo.getDate());
 		pStat.setBoolean(3, todo.isDone());
-		pStat.setInt(4, todo.getId());
+		try
+		{
+			pStat.setInt(4, Integer.parseInt(todo.getId()));
+		}
+		catch (Exception e)
+		{
+			return;
+		}
 		pStat.executeUpdate();
 	}
 	
-	public void delete(int id) throws SQLException
+	public void delete(String id) throws SQLException
 	{
 		PreparedStatement pStat = 
 			conn.prepareStatement
 			("delete from todo where id=?");
 		
-		pStat.setInt(1, id);
+		try
+		{
+			pStat.setInt(1, Integer.parseInt(id));
+		}
+		catch (Exception e)
+		{
+			return;
+		}
 		pStat.executeUpdate();
 	}
 }

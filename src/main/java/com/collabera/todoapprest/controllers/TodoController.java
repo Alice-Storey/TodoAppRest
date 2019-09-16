@@ -22,13 +22,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.collabera.todoapprest.model.Todo;
 import com.collabera.todoapprest.services.TodoService;
 import com.collabera.todoapprest.services.TodoServiceDB;
+import com.collabera.todoapprest.services.TodoServiceMDB;
 import com.collabera.todorest.exceptions.TodoNotFoundException;
 
 @RestController
 public class TodoController
 {
 	@Autowired
-	TodoServiceDB todoService;
+	TodoServiceMDB todoService;
 	
 	
 	@GetMapping("/users/{userid}/todos/{todoindex}")
@@ -39,7 +40,7 @@ public class TodoController
 //		return todoService.getTodo(Integer.parseInt(todoindex));
 		Todo todo = null;
 		
-		todo = todoService.getTodo(Integer.parseInt(todoindex));
+		todo = todoService.getTodo(todoindex);
 		if(todo == null)
 			throw new TodoNotFoundException("Todo not found for fetch");
 		
@@ -112,7 +113,7 @@ public class TodoController
 	{		
 //		return todoService.listTodos(Integer.parseInt(userid)).get(Integer.parseInt(todoindex));
 //		return todoService.deleteTodo(Integer.parseInt(todoindex));
-		Todo todo = todoService.getTodo(Integer.parseInt(todoindex));
+		Todo todo = todoService.getTodo(todoindex);
 		boolean deleted = todoService.deleteTodo(Integer.parseInt(todoindex));
 		if(!deleted)
 			throw new TodoNotFoundException("Todo not found for Delete");
