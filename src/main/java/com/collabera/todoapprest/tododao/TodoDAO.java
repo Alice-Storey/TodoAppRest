@@ -37,6 +37,7 @@ public class TodoDAO
 		// in our case it will contain only one row and only one column - generated id
 		generatedKeysResultSet.next(); // executing next() method to navigate to first row of generated keys (like with any other result set)
 		int id = (int) generatedKeysResultSet.getLong(1); 
+		System.out.println("Added todo with id:"+id);
 		return Integer.toString(id);
 		
 	}

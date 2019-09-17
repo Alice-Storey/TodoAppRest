@@ -38,7 +38,8 @@ public class Todo
 	public Todo( int userId, String description, Date date, boolean isDone)
 	{
 		super();
-		this.id = "-1";
+//		this.id = "-1";
+		this.id = null;
 		this.userId = userId;
 		this.description = description;
 		this.date = date;
@@ -51,7 +52,7 @@ public class Todo
 	{
 		return id;
 	}
-	public void setId(String mId)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

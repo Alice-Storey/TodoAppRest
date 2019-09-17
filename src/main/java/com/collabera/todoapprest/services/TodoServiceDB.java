@@ -35,7 +35,9 @@ public class TodoServiceDB
 		Todo todo = new Todo("-1", userId, description, targetDate, isDone);
 		try
 		{
-			todo.setId(tododao.add(todo));			
+			String newId = tododao.add(todo);
+			todo.setId(newId);
+			System.out.println("set todo's id to:" + newId);
 		}
 		catch (SQLException e)
 		{

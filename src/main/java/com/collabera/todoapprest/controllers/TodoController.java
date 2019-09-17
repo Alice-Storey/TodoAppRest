@@ -29,7 +29,7 @@ import com.collabera.todorest.exceptions.TodoNotFoundException;
 public class TodoController
 {
 	@Autowired
-	TodoServiceMDB todoService;
+	TodoServiceDB todoService;
 	
 	
 	@GetMapping("/users/{userid}/todos/{todoindex}")
