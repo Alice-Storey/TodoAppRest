@@ -26,19 +26,19 @@ public class TodoService implements TodoInterface
 	{
 		todos.add
 		(
-			new Todo("1", 0, "Programming", new Date(2019, 9, 6).toString(), false)
+			new Todo("1", 0, "Programming", "2019-09-16", false)
 		);
 		todos.add
 		(
-			new Todo("2", 1, "Shopping", new Date(2019, 9, 6).toString(), false)
+			new Todo("2", 1, "Shopping", "2019-09-16", false)
 		);
 		todos.add
 		(
-			new Todo("3", 1, "Play Fetch", new Date(2019, 9, 6).toString(), false)
+			new Todo("3", 1, "Play Fetch", "2019-09-16", false)
 		);
 		todos.add
 		(
-			new Todo("4", 1, "Compile", new Date(2019, 9, 6).toString(), false)
+			new Todo("4", 1, "Compile", "2019-09-16", false)
 		);
 		todoCount=5;
 	}

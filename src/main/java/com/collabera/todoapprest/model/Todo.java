@@ -1,7 +1,7 @@
 package com.collabera.todoapprest.model;
 
 import java.sql.Date;
-
+import java.text.SimpleDateFormat;
 
 import javax.validation.constraints.Size;
 
@@ -21,6 +21,8 @@ public class Todo
 	
 	private String date;
 	private boolean isDone;
+	
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public Todo()
 	{
@@ -120,15 +122,28 @@ public class Todo
 	{
 		return date;
 	}
+	public Date getSqlDate()
+	{
+		return Date.valueOf(date);
+	}
+	public java.util.Date getJavaDate()
+	{
+		try
+		{
+			return dateFormat.parse(date);
+		}
+		catch (java.text.ParseException e)
+		{
+			return null;
+		}
+	}
 	public void setDate(Date date)
 	{
-//		this.date = date;
-		this.date = "placeholder-date";
+		this.date = date.toString();
 	}
 	public void setDate(java.util.Date date)
 	{
-//		this.date = new Date(date.getTime());
-		this.date = "placeholder-date";
+		this.date = dateFormat.format(date);
 	}
 	public void setDate(String date)
 	{

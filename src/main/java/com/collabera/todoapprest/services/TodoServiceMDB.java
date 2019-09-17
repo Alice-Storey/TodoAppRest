@@ -23,13 +23,7 @@ public class TodoServiceMDB implements TodoInterface
 	
 	public List<Todo> listTodos(int userId)
 	{
-		if (todoMongoDBRepository == null)
-		{
-			System.out.println("Repository is Null!");
-			return null;
-		}
-		System.out.println("repo name is:"+todoMongoDBRepository.getClass().getSimpleName());
-		return todoMongoDBRepository.findAll();
+		return todoMongoDBRepository.findByUserId(userId);
 	}
 	
 	public Todo addTodo(int userId, String description, String targetDate, boolean isDone)
@@ -48,7 +42,7 @@ public class TodoServiceMDB implements TodoInterface
 	
 	public Todo getTodo(String todoId) 
 	{
-		return null;
+		return todoMongoDBRepository.findById(todoId).get();
 	}
 	
 	public boolean updateTodo(Todo todo)
