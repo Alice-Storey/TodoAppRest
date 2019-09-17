@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.collabera.todoapprest.model.Todo;
+import com.collabera.todoapprest.services.TodoInterface;
 import com.collabera.todoapprest.services.TodoService;
 import com.collabera.todoapprest.services.TodoServiceDB;
 import com.collabera.todoapprest.services.TodoServiceMDB;
@@ -29,7 +30,7 @@ import com.collabera.todorest.exceptions.TodoNotFoundException;
 public class TodoController
 {
 	@Autowired
-	TodoServiceDB todoService;
+	TodoInterface todoService;
 	
 	
 	@GetMapping("/users/{userid}/todos/{todoindex}")

@@ -5,13 +5,16 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.collabera.todoapprest.model.Todo;
 import com.collabera.todoapprest.tododao.TodoDAO;
 
 @Service
-public class TodoServiceDB
+@ConditionalOnProperty(name = "mode", havingValue = "SQL")
+public class TodoServiceDB implements TodoInterface
 {
 	
 	TodoDAO tododao=new TodoDAO();
@@ -30,7 +33,7 @@ public class TodoServiceDB
 		return todos;
 	}
 	
-	public Todo addTodo(int userId, String description, Date targetDate, boolean isDone)
+	public Todo addTodo(int userId, String description, String targetDate, boolean isDone)
 	{
 		Todo todo = new Todo("-1", userId, description, targetDate, isDone);
 		try
@@ -77,20 +80,24 @@ public class TodoServiceDB
 		}
 	}
 	
-	public boolean updateTodo(Todo todo) throws SQLException
+	public boolean updateTodo(Todo todo) 
 	{
 		if (getTodo(todo.getId()) == null)
 			return false;
-		
-		try
-		{
-			tododao.update(todo);
+		else
 			return true;
-		}
-		catch (SQLException e)
-		{
-			System.out.println(e);
-			return false;
-		}
+		
+//		try
+//		{
+//			tododao.update(todo);
+//			return true;
+//		}
+//		catch (SQLException e)
+//		{
+//			System.out.println(e);
+//			return false;
+//		}
+		
+		
 	}
 }

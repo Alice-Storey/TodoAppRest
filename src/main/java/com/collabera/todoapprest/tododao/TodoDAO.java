@@ -28,7 +28,9 @@ public class TodoDAO
 			("insert into todo (user_id, desc_, date_, done_) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 		pStat.setInt(1, todo.getUserId());
 		pStat.setString(2, todo.getDescription());
-		pStat.setDate(3, todo.getDate());
+//		pStat.setDate(3, todo.getDate());
+		System.out.println("Stub: TodoDAO::add(Todo): setDate(int, Date)");
+		pStat.setDate(3, new Date(2019, 9, 6));
 		pStat.setBoolean(4, todo.isDone());
 		pStat.executeUpdate();
 		
@@ -95,7 +97,7 @@ public class TodoDAO
 			}
 			catch (IllegalArgumentException e)
 			{
-				todo.setDate(null);
+				todo.setDate("null-date");
 			}
 			todo.setDescription(results.getString("desc_"));
 			todo.setDone(  
@@ -115,7 +117,8 @@ public class TodoDAO
 			("update todo set desc_=?, date_=?, done_=? where id=?");
 		
 		pStat.setString(1, todo.getDescription());
-		pStat.setDate(2, todo.getDate());
+		System.out.println("Stub: TodoDAO::update(Todo): setDate(int, Date)");
+		pStat.setDate(2, new Date(2019, 9, 6));
 		pStat.setBoolean(3, todo.isDone());
 		try
 		{

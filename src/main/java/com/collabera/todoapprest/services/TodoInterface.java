@@ -10,13 +10,13 @@ public interface TodoInterface {
 	public List<Todo> listTodos(int userId);
 
 	//create
-	public Todo addTodo(int userId, String description, Date targetDate, boolean isDone);
+	public Todo addTodo(int userId, String description, String targetDate, boolean isDone);
 
 	//delete
-	public boolean deleteTodo(int todoId);
+	public boolean deleteTodo(String todoId);
 
 	//update
 	public boolean updateTodo(Todo todo);
 	
-	public Todo getTodo(int todoId);
+	public Todo getTodo(String todoId);
 }

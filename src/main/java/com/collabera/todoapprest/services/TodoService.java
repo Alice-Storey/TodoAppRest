@@ -4,13 +4,18 @@ import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.collabera.todoapprest.model.Todo;
 
 @SuppressWarnings("deprecation")
-@Service
-public class TodoService
+@Component
+@ConditionalOnProperty(name = "mode", havingValue = "InMemory")
+public class TodoService implements TodoInterface
 {
 	//CRUD
 	
@@ -21,19 +26,19 @@ public class TodoService
 	{
 		todos.add
 		(
-			new Todo("1", 0, "Programming", new Date(2019, 9, 6), false)
+			new Todo("1", 0, "Programming", new Date(2019, 9, 6).toString(), false)
 		);
 		todos.add
 		(
-			new Todo("2", 1, "Shopping", new Date(2019, 9, 6), false)
+			new Todo("2", 1, "Shopping", new Date(2019, 9, 6).toString(), false)
 		);
 		todos.add
 		(
-			new Todo("3", 1, "Play Fetch", new Date(2019, 9, 6), false)
+			new Todo("3", 1, "Play Fetch", new Date(2019, 9, 6).toString(), false)
 		);
 		todos.add
 		(
-			new Todo("4", 1, "Compile", new Date(2019, 9, 6), false)
+			new Todo("4", 1, "Compile", new Date(2019, 9, 6).toString(), false)
 		);
 		todoCount=5;
 	}
@@ -55,7 +60,7 @@ public class TodoService
 		return todos;
 	} 
 	
-	public Todo addTodo(int userId, String description, Date targetDate, boolean isDone)
+	public Todo addTodo(int userId, String description, String targetDate, boolean isDone)
 	{
 		Todo newTodo = new Todo(Integer.toString(++todoCount), userId, description, targetDate, isDone);
 		todos.add(newTodo);
